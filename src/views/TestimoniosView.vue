@@ -2,7 +2,7 @@
   <div class="my-8">
     <h2>Testimonios Software Project Leader</h2>
     <!-- Nombre del Team -->
-    <h3>Alhp</h3>
+    <h3>Team A</h3>
     <v-row class="row-container mt-9">
       <v-col v-for="testimonio in testimonios" :key="testimonio.id" cols="12" sm="6" md="4" lg="3">
         <v-card shaped class="mb-4">
