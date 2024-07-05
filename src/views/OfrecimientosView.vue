@@ -3,7 +3,7 @@
     <h2>Ofrecer 🤝 SPL</h2>
     <h3>¿Qué tenemos para ofrecer?</h3>
     <!-- Nombre del Team -->
-    <h2>Team A </h2>
+    <h2>Colombianitos FLOW </h2>
     <v-row class="row-container mt-9">
       <v-col v-for="ofrecimiento in ofrecimientos" :key="ofrecimiento.id" cols="12" sm="6" md="4" lg="3">
         <v-card shaped class="mb-4">
