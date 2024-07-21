@@ -1,9 +1,12 @@
 <template>
   <div class="my-8">
     <h2>Ofrecer 🤝 SPL</h2>
-    <h3>¿Qué tenemos para ofrecer?</h3>
-    <!-- Nombre del Team -->
-    <h2>Team A </h2>
+    <p>Desde lo que somos, nuestras profesiones, nuestros roles, gustos y
+      pasiones ¿Qué
+      nos gustaría ofrecer al equipo?</p>
+    <!-- Esto es un comentario en HTML -->
+    <!-- La línea de abajo es el título que tiene el nombre del equipo -->
+    <h2>Team A</h2>
     <v-row class="row-container mt-9">
       <v-col v-for="ofrecimiento in ofrecimientos" :key="ofrecimiento.id" cols="12" sm="6" md="4" lg="3">
         <v-card shaped class="mb-4">
@@ -76,6 +79,13 @@ h2 {
 
 h3 {
   font-size: 25px;
+}
+
+p {
+  text-align: center;
+  font-weight: 500;
+  width: 30%;
+  margin: 0 auto;
 }
 
 .headline {

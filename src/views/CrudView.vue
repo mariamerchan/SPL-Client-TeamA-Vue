@@ -2,7 +2,10 @@
   <v-container>
     <h1>CRUD Ofrecimientos</h1>
     <div class="btn-container">
-      <v-btn color="primary" @click="openCrearModal">Crear Ofrecimiento</v-btn>
+      <v-btn rounded color="primary" class="text-capitalize" @click="openCrearModal">
+        <v-icon small color="white" class="mr-2">mdi-plus</v-icon>
+        Crear Ofrecimiento
+      </v-btn>
     </div>
 
     <v-alert v-if="mensaje" :type="alertColor" dismissible @input="mensaje = ''">
@@ -12,8 +15,17 @@
     <v-data-table :headers="headers" :items="ofrecimientos" :items-per-page="5" class="elevation-1">
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.actions="{ item }">
-        <v-icon small color="success" class="mr-2" @click="openActualizarModal(item)">mdi-pencil</v-icon>
-        <v-icon small color="error" @click="eliminarOfrecimientos(item.id)">mdi-delete</v-icon>
+        <div class="btn-actions-container">
+          <v-btn rounded small class="text-capitalize text-success" color="#eafff6" @click="openActualizarModal(item)">
+            <v-icon small color="#65ac84" class="mr-2">mdi-pencil</v-icon>
+            Actualizar
+          </v-btn>
+          <v-btn rounded small class="text-capitalize text-warning" color="#fce7e6"
+            @click="eliminarOfrecimientos(item.id)">
+            <v-icon small color="#d45253">mdi-delete</v-icon>
+            Eliminar
+          </v-btn>
+        </div>
       </template>
     </v-data-table>
 
@@ -27,11 +39,13 @@
           </v-btn>
         </v-card-title>
         <v-card-text>
-          <v-form @submit.prevent="crearOfrecimiento">
-            <v-text-field v-model="nuevoNombre" label="Nombre"></v-text-field>
-            <v-textarea v-model="nuevaDescripcion" label="Ofrecimiento"></v-textarea>
-            <v-text-field v-model="nuevaURL" label="URL"></v-text-field>
-            <v-btn color="primary" type="submit">Crear</v-btn>
+          <v-form ref="crearForm" v-model="valid" @submit.prevent="crearOfrecimiento">
+            <v-text-field v-model="nuevoNombre" label="Nombre" :rules="[rules.required]"></v-text-field>
+            <v-textarea v-model="nuevaDescripcion" label="Ofrecimiento" :rules="[rules.required]"></v-textarea>
+            <v-text-field v-model="nuevaURL" label="URL" :rules="[rules.required]"></v-text-field>
+            <v-btn :disabled="!valid" rounded color="primary" type="submit" class="text-capitalize">
+              <v-icon small color="white">mdi-plus</v-icon>
+              Crear</v-btn>
           </v-form>
         </v-card-text>
       </v-card>
@@ -51,7 +65,10 @@
             <v-text-field v-model="OfrecimientoActual.nombre" label="Nombre"></v-text-field>
             <v-textarea v-model="OfrecimientoActual.descripcion" label="Ofrecimiento"></v-textarea>
             <v-text-field v-model="OfrecimientoActual.socialUrl" label="URL"></v-text-field>
-            <v-btn color="primary" type="submit">Actualizar</v-btn>
+            <v-btn rounded color="primary" type="submit" class="text-capitalize">
+              <v-icon small class="mr-2">mdi-pencil</v-icon>
+              Actualizar
+            </v-btn>
           </v-form>
         </v-card-text>
       </v-card>
@@ -63,6 +80,7 @@
 export default {
   data() {
     return {
+      valid: false,
       ofrecimientos: [],
       headers: [
         { text: 'ID', value: 'id' },
@@ -78,7 +96,14 @@ export default {
       mensaje: '',
       type: '',
       crearModal: false,
-      actualizarModal: false
+      actualizarModal: false,
+      rules: {
+        required: value => !!value || 'Este campo es requerido.',
+        url: value => {
+          const pattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+          return pattern.test(value) || 'URL no válida.'
+        }
+      }
     };
   },
   created() {
@@ -236,8 +261,9 @@ export default {
 }
 
 h1 {
+  margin-top: 5%;
   font-weight: bold;
-  color: #051330;
+  color: #165c66;
 }
 
 .btn-container {
@@ -246,6 +272,24 @@ h1 {
   margin-bottom: 5%;
 }
 
+.btn-actions-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.text-success {
+  color: #66ac87;
+}
+
+.text-warning {
+  color: #db5a5c;
+}
 
 .headline {
   font-size: 20px;
