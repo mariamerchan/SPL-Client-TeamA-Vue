@@ -1,10 +1,12 @@
 <template>
   <v-app class="app-container">
     <div class="app-background">
-      <v-app-bar app color="#051330" height="110" dark>
+      <v-app-bar app color="#165c66" height="110" dark>
         <div class="d-flex justify-space-between align-center header-container">
-          <!-- <img alt="Lihtsus Logo" src="./assets/lihtsus-logo.png" width="100" /> -->
-          <v-app-bar-title style="width: 200px;">Ofrecer App</v-app-bar-title>
+          <div class="d-flex align-center">
+            <img alt="Lihtsus Logo" src="./assets/isotipo-lihtsus.png" width="50" />
+            <h2 class="ml-4">Ofrecer App</h2>
+          </div>
           <div class="btn-container-app">
             <v-btn class="btns" text to="/" exact>
               Ofrecimientos
